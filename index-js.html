@@ -1,0 +1,23 @@
+<script>
+
+let usersListDTO = [];
+let organizationUnit;
+
+let destinationFolder = document.getElementById('destinationFolderId');
+checkSettings();
+function checkSettings() {
+  google.script.run
+    .withSuccessHandler(id => destinationFolder.value = id)
+    .withFailureHandler(message => showWarning(message))
+    .getSettings();
+}
+
+function showWarning(message){
+  console.log("Error: "+message);
+}
+
+function showMessage(message){
+  window.open(message);
+}
+
+</script>

@@ -1,0 +1,41 @@
+<script>
+let downloadListBt = document.getElementById('downloadListBt');
+downloadListBt.addEventListener("click", () => {
+  if(usersListDTO.length == 0) {
+    window.alert("You can't download an empty list!");
+  } else {
+    google.script.run
+      .withSuccessHandler(message => showMessage(message))
+      .withFailureHandler(message => showWarning(message))
+      .createSheet(usersListDTO, destinationFolder.value);
+  }
+});
+
+function formatTable() {
+  document.querySelector('table').style.border = 'solid 1px black';
+  document.querySelectorAll('th').forEach((element,index) => {
+    element.style.border = 'solid 1px black';
+    element.style.padding = '5px';
+    element.style.background = 'lightgrey';
+    element.style.textAlign = 'center';
+    if(index%2 == 0){
+      element.style.width = '10em';
+    } else {
+      element.style.width = '50em';
+    }
+    
+  });
+  document.querySelectorAll('td').forEach((element,index) => {
+    element.style.border = 'solid 1px black';
+    element.style.padding = '5px'
+    element.style.background = 'white';
+    element.style.textAlign = 'center';
+    if(index%2 == 0){
+      element.style.width = '10em';
+    } else {
+      element.style.width = '50em';
+    }
+  });
+  document.querySelector('table').style.borderCollapse = 'collapse';
+}
+</script>

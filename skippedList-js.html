@@ -1,0 +1,8 @@
+<script>
+let skippedList = document.getElementById('skippedBt');
+skippedList.addEventListener("click", () => {
+  google.script.run
+    .withSuccessHandler(url => showMessage(url))
+    .getSkippedFile();
+});
+</script>

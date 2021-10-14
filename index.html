@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <?!= include('index-css'); ?>
+  </head>
+  <body>
+    <div class='main-cotainer'>
+      <div id='instruction' class='distance styling'>
+        <h2 class='flexible'>How to?</h2>
+        <p class='flexible'>This tool will generate a list of users from selected Organization Unit</p>
+        <div class='flexible'>
+          <p class='p flexible'><b>Prerequisites:</b> users-read admin priviledge</p>
+        </div>
+      </div>
+
+      <div id='settings' class='distance styling'>
+        <h2 class='flexible'>Settings</h2>
+        <div class='flexible'>
+          <p class='p'>No of users</p>
+          <input class='input' id='noOfUsers' type="number">
+        </div>
+        <div class='flexible'>
+          <p class='p'>Organization Unit</p>
+          <select class='input' id="OU">
+            <option value="/Roche/Suspended_Accounts">/Roche/Suspended_Accounts</option>
+            <option value="/Genentech/Suspended_Accounts">/Genentech/Suspended_Accounts</option>
+          </select>
+        </div>
+        <div class='flexible'>
+          <p class='p'>Please provide destination folder Id</p>
+          <input type='text' id='destinationFolderId' class='input'>
+        </div>
+        <div class='flexible'>
+          <button id='submitBt'>Generate list</button>
+        </div>
+      </div>
+
+      <div id='result' class='flexible distance styling'>
+        <div>
+          <h2 class='flexible'>Prepared list</h2>
+          <div id='loading' class='p flexible'></div>
+          <div id='usersList'></div>
+          <div class='flexible'><button id='downloadListBt'>Download list</button></div>
+        </div>
+      </div>
+
+      <div id='skipped' class='flexible distance styling'>
+        <button id='skippedBt'>Show skipped accounts list</button>
+      </div>
+    </div>
+    <?!= include('index-js'); ?>
+    <?!= include('generateList-js'); ?>
+    <?!= include('updateList-js'); ?>
+    <?!= include('downloadList-js'); ?>
+    <?!= include('skippedList-js'); ?>
+  </body>
+</html>

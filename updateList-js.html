@@ -1,0 +1,38 @@
+<script>
+let usersList = document.getElementById('usersList');
+function updatePreList(usersDTO){
+  document.getElementById('loading').innerHTML = '';
+
+  if(organizationUnit.localeCompare('/Roche/Suspended_Accounts') == 0){
+    usersDTO = usersDTO.filter(user => checkRocheDomain(user));
+  } else if(organizationUnit.localeCompare('/Genentech/Suspended_Accounts') == 0){
+    usersDTO = usersDTO.filter(user => checkGeneDomain(user));
+  }
+
+  usersListDTO = usersDTO;
+  if(usersDTO.length){
+    let htmlTable = "<table><tr><th></th><th>Email address</th></tr>";
+    usersDTO.forEach(user => {
+      htmlTable += "<tr><td>"+(usersDTO.indexOf(user)+1)+"</td><td>"+user+"</td></tr>"
+    });
+    htmlTable += "</table>";
+    usersList.innerHTML = htmlTable;
+    formatTable();
+  } else {
+    usersListDTO.length = 0;
+    usersList.innerHTML = "Empty list";
+  }
+}
+
+function checkRocheDomain(userEmail) {
+  let email = userEmail.split("@");
+  if(!email[1].includes('roche.com'))console.log(userEmail)
+  return email[1].includes('roche.com');
+}
+
+function checkGeneDomain(userEmail) {
+  let email = userEmail.split("@");
+  if(!email[1].includes('gene.com'))console.log(userEmail)
+  return email[1].includes('gene.com');
+}
+</script>

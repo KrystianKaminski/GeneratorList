@@ -1,0 +1,32 @@
+<script>
+let submitBt = document.getElementById('submitBt');
+submitBt.addEventListener('click', () => {
+  let settingsDTO = {
+    noOfUsers: document.getElementById('noOfUsers').value,
+    organizationUnit: document.getElementById('OU').value
+  }
+  organizationUnit = document.getElementById('OU').value;
+
+  if(parseInt(settingsDTO.noOfUsers) > 0 ) {
+    document.getElementById('loading').innerHTML = 'Loading....';
+    document.getElementById('usersList').innerHTML = '';
+
+    google.script.run
+      .withSuccessHandler(usersDTO => updatePreList(usersDTO))
+      .withFailureHandler(message => {
+        showWarning(message);
+        document.getElementById('loading').innerHTML = 'API Error. Please try again. '+message;
+        usersListDTO.length = 0;
+      })
+      .generateListOfUsers(settingsDTO);
+
+    if(destinationFolder.value) {
+      google.script.run
+        .updateDefaultFolderId(destinationFolder.value);
+    }
+  } else {
+    window.alert('Please fill correctly the "number of users" field.');
+  }
+  
+});
+</script>
